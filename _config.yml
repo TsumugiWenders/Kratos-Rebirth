@@ -173,36 +173,3 @@ site_verify:
   bing: C258629E6197B3E5F1664527F17242D4 
 
 # Friends 友链相关内容
-friends:
-  href: "friends"
-  page:
-    title: "绒布球们"
-    comments: false
-    description: "好伙伴们在哪里~"
-    updated: "2021-04-23"
-  list:
-  - name: "晨旭的博客"
-    bio: "技术特别菜（大佬们放萌新一条生路吧）"
-    avatar: "https://avatars3.githubusercontent.com/u/10357394?v=4&s=48"
-    link: "https://www.chenxublog.com/"
-  - name: "ZeroDream 零梦博客"
-    bio: "一个喜欢东方和游戏的宅 phper，分享一些和网站开发以及游戏相关的内容。"
-    avatar: "https://blogcdn.zerodream.net/wp-content/uploads/2019/01/ZeroDream-Logo-Single-White-Main.png"
-    link: "https://lo-li.cn/"
-  - name: "楓の街"
-    bio: "一位折腾编程、算法、数据分析、各种耍、捣鼓各种东西 ，正在努力的大学生。"
-    avatar: "https://www.mapletown.xyz/usr/themes/Akina/images/akinadeaava.jpg"
-    link: "https://www.mapletown.xyz/"
-  - name: "背影"
-    bio: "喵喵？"
-    avatar: "https://beiyingxs.gitee.io/img/head.jpg"
-    link: "https://beiyingxs.gitee.io/"
-  - name: "白小飞"
-    bio: "啊嘞?好像并没有简介的样子"
-    avatar: "https://s1.ax1x.com/2020/08/05/ayRY28.jpg"
-    link: "http://blog.baixf.tk/"
-  - name: "糖菓·部落"
-    bio: "𝕹𝖊𝖛𝖊𝖗 𝖉𝖗𝖔𝖜𝖓 𝖙𝖍𝖊 𝖋𝖆𝖑𝖒𝖊 𝖔𝖋 𝖍𝖔𝖕𝖊"
-    avatar: "https://cdn.jsdelivr.net/gh/Candinya/Candinya/img/candinya.webp"
-    link: "https://candinya.com"
-  verify: true # 验证每个友链的可访问性，炸了会有提示
