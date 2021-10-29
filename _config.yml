@@ -33,7 +33,7 @@ menu:
   TestLab:
     submenu: true
     AriaNg: http://ariang.nekopara.net
-    FC: https://zong-my.sharepoint.com/:f:/g/personal/neko_nekopara_net/Eh3nr7Co-y5JrZFdW3AiZwcBCPA5okTFcigLCRl7NZFP1A:
+    FC: "https://zong-my.sharepoint.com/:f:/g/personal/neko_nekopara_net/Eh3nr7Co-y5JrZFdW3AiZwcBCPA5okTFcigLCRl7NZFP1A:"
   EveryDayPic: /everydaypic/
   about: /about/
 
@@ -136,7 +136,7 @@ avatarUri: /images/logo.webp
 mobile_toc: 
   hide: false
   hide_id: false
-  
+
 # Fancybox 文章内图片单击放大
 fancybox: true
 
@@ -144,7 +144,7 @@ fancybox: true
 search:
   enable: true
   path: search.json
-  field: post # page | post | all. Default post
+  field: all # page | post | all. Default post
   content: true # Include post | page content
 
 # JavaScript 相关配置
@@ -156,7 +156,7 @@ jsconfig:
       random_amount: 20 # 表示从1~20
       filename: "images/thumb/thumb_{no}.webp" # 相对于主题根目录，表示文件名的格式, {no} 用以指代随机的编号。
                                               # 如果包含 // 表示使用指定域名的绝对路径（例如第三方图床服务等），那么会忽略 CDN 选项
-    createTime: "2019-09-04 00:00:00"
+    createTime: "2018/05/06 17:03:12"
     donateBtn: "支持我~"
     scanNotice: "扫一扫，好不好？"
     qr_alipay: "/images/alipayqr.webp"
@@ -175,3 +175,16 @@ site_verify:
   bing: C258629E6197B3E5F1664527F17242D4 
 
 # Friends 友链相关内容
+#friends:
+#  href: "friends"
+#  page:
+#    title: "好伙伴们"
+#    comments: false
+#    description: "好伙伴们在哪里~"
+#    updated: "2021-01-18"
+#  list:
+#  - name: "猫猫①号"
+#    bio: "喵~"
+#    avatar: "../images/avatar.webp"
+#    link: "#"
+#  verify: true # 验证每个友链的可访问性，炸了会有提示
