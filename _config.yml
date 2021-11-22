@@ -75,7 +75,7 @@ posts:
   show_cc: true
   donate: false
   share: true
-  comments: valine
+  comments: waline
 
 # Disqus [Disqus](https://disqus.com) 评论相关
 disqus:
@@ -109,9 +109,16 @@ twikoo:
 # Waline [Waline](https://waline.js.org) 评论相关
 ## 不仅限于以下内容，您可以参照 Waline的 [前端配置文档](https://waline.js.org/client/basic.html) 设置您需要的配置项
 ## el 和 path 会在页面自动生成，不必加入
-waline:
-  serverURL: #后端服务器地址，必填
-  visitor: true
+valine:
+  app_id: EWGp0LGyyzwFfzyyRkJLxb0F-MdYXbMMI
+  app_key: YLPqtg30U5smlAGqTQW1WV9O
+  visitor: false
+  enableQQ: true
+  notify: false
+  verify: true
+  placeholder: 没有问题吗？
+  avatar: wavatar
+  pageSize: 10
 
 # APlayer 左下角音乐播放器
 aplayer:
