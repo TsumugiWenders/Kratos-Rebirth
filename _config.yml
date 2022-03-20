@@ -106,15 +106,8 @@ twikoo:
 ## 不仅限于以下内容，您可以参照 Waline的 [前端配置文档](https://waline.js.org/client/basic.html) 设置您需要的配置项
 ## el 和 path 会在页面自动生成，不必加入
 waline:
-  app_id: MM5Vv8PdW1FI6xe4FNyUDVi1-MdYXbMMI
-  app_key: X3B0xFQM31xLav3vo6aBNSY3
-  visitor: false
-  enableQQ: true
-  notify: false
-  verify: true
-  placeholder: 没有问题吗？
-  avatar: mp
-  pageSize: 10
+  serverURL: https://blog-api-mocha.vercel.app
+  visitor: true
 
 # APlayer 左下角音乐播放器
 aplayer:
