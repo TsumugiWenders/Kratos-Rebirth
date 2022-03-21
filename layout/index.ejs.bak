@@ -1,57 +1,3 @@
-<!-- Breadcrumb for tag & category page -->
-<% if (page.tag || page.category) { %>
-    <article class="kratos-hentry kratos-entry-border-new clearfix">
-        <div class="kratos-breadcrumb">
-            <a href="<%- url_for('/') %>">
-                <i class="fa fa-home"></i>
-            </a>
-            <i class="fa fa-angle-right"></i>
-            <% if (page.tag) { %>
-                <a href="<%- url_for('/tags/') %>">
-                    <%= __('tag') %>
-                </a>
-                <i class="fa fa-angle-right"></i>
-                <a href="<%- url_for('/tags/' + page.tag) %>">
-                    <%= page.tag %>
-                </a>
-            <% } else if (page.category) { %>
-
-                <a href="<%- url_for('/categories/') %>">
-                    <%= __('category') %>
-                </a>
-
-                <%
-                /* Find full category */
-                var pCategory = site.categories.filter(category => is_current(category.path, true)).first();
-                if (!pCategory) {
-                    // fallback
-                    pCategory = site.categories.findOne({"name": page.category});
-                }
-                var categroyInfo = [pCategory];
-                while (pCategory.parent) {
-                    pCategory = site.categories.findOne({"_id": pCategory.parent});
-                    categroyInfo.push(pCategory);
-                }
-                categroyInfo = categroyInfo.reverse();
-                const categoryLength = categroyInfo.length;
-                %>
-                <% for (let i = 0; i < categoryLength; i++) { %>
-                    <i class="fa fa-angle-right"></i>
-                    <a href="<%- url_for(categroyInfo[i].path) %>">
-                        <%= categroyInfo[i].name %>
-                    </a>
-                <% } %>
-            <% } %>
-            <% if (page.current > 1) { %>
-                <i class="fa fa-angle-right"></i>
-                <span>
-                    <%= __('page', page.current) %>
-                </a>
-            <% } %>
-        </div>
-    </article>
-<% } %>
-
 <% page.posts.each(function(post) { %>
     <% if (post.only) {
         const postShow = 
@@ -101,7 +47,7 @@
                                 </a>
                             <% } %>
                         <% } %>
-                        <% if (theme.index.comment_count && post.comments) { %>
+                        <% if (theme.index.comment_count) { %>
                             <!-- 当前仅支持waline自带的统计功能 -->
                             <% if (theme.posts.comments === 'waline') { %>
                                 <a>
@@ -127,7 +73,7 @@
                 <div class="kratos-entry-thumb-new">
                     <a href="<%- url_for(post.path) %>">
                         <% if (post.pic) { %>
-                            <img class="kratos-entry-thumb-new-img" src="<%- post.pic.includes('://') ? post.pic : url_for(post.path.replace(/(\/index)?\.html?$/, '') + '/' + post.pic) %>">
+                            <img class="kratos-entry-thumb-new-img" src="<%- post.pic.includes('://') ? post.pic : url_for(post.path + post.pic) %>">
                         <% } %>
                     </a>
                 </div>
@@ -172,7 +118,7 @@
                                 </li>
                             <% } %>
                         <% } %>
-                        <% if (theme.index.comment_count && post.comments) { %>
+                        <% if (theme.index.comment_count) { %>
                             <!-- 当前仅支持waline自带的统计功能 -->
                             <% if (theme.posts.comments === 'waline') { %>
                                 <li>
@@ -205,7 +151,7 @@
                 <div class="kratos-entry-thumb-new">
                     <a href="<%- url_for(post.path) %>">
                         <% if (post.pic) { %>
-                            <img class="kratos-entry-thumb-new-img" src="<%- post.pic.includes('://') ? post.pic : url_for(post.path.replace(/(\/index)?\.html?$/, '') + '/' + post.pic) %>">
+                            <img class="kratos-entry-thumb-new-img" src="<%- post.pic.includes('://') ? post.pic : url_for(post.path + post.pic) %>">
                         <% } else { %>
                             <img class="kratos-entry-thumb-new-img">
                         <% } %>

@@ -29,7 +29,7 @@
 /******************* Theme ********************/
 @mixin dark-mode {
     --banner-image: url('../images/banner_dark.webp');
-    --background-image: url('../images/bg_dark.webp');
+    /* --background-image: none; */
 
     --select-text: #333;
     --select-text-bg: #ccc;
@@ -83,8 +83,8 @@ h4,
 h5,
 h6,
 ol,
-ul,
-p {
+p,
+ul {
     color: var(--text);
 }
 
@@ -187,10 +187,6 @@ ul.kratos-post-meta {
         }
 
         &.widget-kratos {
-            &-about .site-meta > .meta-item:hover {
-                background-color: var(--info-background);
-            }
-
             &-tags {
                 .tag-clouds a {
                     background-color: var(--tag-background);
@@ -202,14 +198,9 @@ ul.kratos-post-meta {
                 }
             }
         
-            &-categories .category-list-item {
-                &::before {
-                    color: var(--text-alt);
-                }
-                .category-list-count {
-                    color: var(--text);
-                    background-color: var(--info-background);
-                }
+            &-categories .category-list-item .category-list-count {
+                color: var(--text);
+                background-color: var(--info-background);
             }
         }
     }
@@ -271,8 +262,7 @@ ul.kratos-post-meta {
     }
 }
 
-#archives .posts-collapse .post-title a,
-.categories > ul.category-list > li.category-list-item a {
+#archives .posts-collapse .post-title a {
     color: var(--text-alt);
 }
 
@@ -360,7 +350,7 @@ span.blur {
     }
 }
 
-.aplayer * {
+#aplayer * {
     color: unset;
 }
 

@@ -2246,7 +2246,7 @@ body.nav-up #kratos-widget-area > .sticky-area {
       font-size: 15px;
     }
 
-    &.search-box a {
+    & a {
       display: contents;
     }
 
@@ -2934,10 +2934,6 @@ span.mjx-chtml.MJXc-display {
     padding: 0;
     border-radius: 4px;
   }
-}
-
-.v[data-class=v] code:not([class*=language-]) {
-  background-color: #6c6c6cc6!important;
 }
 
 /******************* Images ********************/

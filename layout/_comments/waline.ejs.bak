@@ -12,14 +12,12 @@
                     'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-object',
                     'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-symbol',
                     'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-time',
-                    'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-travel',
-                    'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-weather',
-                    'https://cdn.jsdelivr.net/gh/TsumugiWenders/emojis@0.0.1/usagi',
+                    'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-travel'
                 ]
             }, JSON.parse('<%- JSON.stringify(theme.waline) %>')));
         }
-        if (typeof Waline == 'undefined') {
-            const src = 'https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js';
+        if (typeof Waline === 'undefined') {
+            const src = '<%- url_npm_cdn("@waline/client/dist/Waline.min.js") %>';
             $.getScript(src, init);
         } else {
             init();
