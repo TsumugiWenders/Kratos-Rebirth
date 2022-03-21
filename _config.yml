@@ -107,7 +107,7 @@ twikoo:
 ## el 和 path 会在页面自动生成，不必加入
 waline:
   serverURL: https://blog-api-mocha.vercel.app
-  avatarCDN: https://blog.nekopara.net/images/logo.webp
+  avatarCDN: https://seccdn.libravatar.org
   placeholder: 说点什么喵～o(=•ェ•=)m\\n无需登录也完全没问题哦～
   visitor: true
   langMode: {"admin":"🍬"}
