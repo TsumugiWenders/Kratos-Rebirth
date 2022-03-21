@@ -5,15 +5,6 @@
             new Waline(Object.assign({
                 el: '#w-comments',
                 path: '<%- url_for(page.path) %>'
-                emoji: [
-                    'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji',
-                    'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-flag',
-                    'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-food',
-                    'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-object',
-                    'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-symbol',
-                    'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-time',
-                    'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-travel',
-                ]
             }, JSON.parse('<%- JSON.stringify(theme.waline) %>')));
         }
         if (typeof Waline === 'undefined') {
