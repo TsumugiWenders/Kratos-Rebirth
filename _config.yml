@@ -106,7 +106,7 @@ twikoo:
 ## 不仅限于以下内容，您可以参照 Waline的 [前端配置文档](https://waline.js.org/client/basic.html) 设置您需要的配置项
 ## el 和 path 会在页面自动生成，不必加入
 waline:
-  serverURL: https://blog-api-mocha.vercel.app
+  serverURL: https://waline.nekopara.net
   avatarCDN: https://ga.candinya.com/avatar/
   placeholder: 说点什么喵～o(=•ェ•=)m\\n无需登录也完全没问题哦～
   visitor: true
