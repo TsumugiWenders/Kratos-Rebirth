@@ -6,21 +6,33 @@
                     <div class="nav-header">
                         <nav id="kratos-menu-wrap">
                             <ul id="kratos-primary-menu" class="sf-menu">
-                                <% for (const i in theme.menu){ %>
-                                    <% if (typeof (theme.menu[i]['submenu']) !== 'undefined') { %>
-                                        <li>
-                                            <a><%- theme.label[i]['submenu'] %></a>
+                                <% for (const item of theme.nav.items) { %>
+                                    <li<% if (item.float_right) { %> class="right"<% } %>>
+                                        <% if (item.submenu) { %>
+                                            <a>
+                                        <% } else { %>
+                                            <a href="<%- url_for(item.url) %>">
+                                        <% } %>
+                                            <% if (item.icon) { %>
+                                                <%- icon_to_html(item.icon) %>
+                                            <% } %>
+                                            <%- item.label %>
+                                        </a>
+                                        <% if (item.submenu) { %>
                                             <ul class="sub-menu">
-                                                <% for (const j in theme.menu[i]){ %>
-                                                    <% if (j !== 'submenu') { %>
-                                                        <li><a href="<%- url_for(theme.menu[i][j]) %>"><%- theme.label[i][j] %></a></li>
-                                                    <% } %>
+                                                <% for (const submenu of item.submenu) { %>
+                                                    <li>
+                                                        <a href="<%- url_for(submenu.url) %>">
+                                                            <% if (submenu.icon) { %>
+                                                                <%- icon_to_html(submenu.icon) %>
+                                                            <% } %>
+                                                            <%- submenu.label %>
+                                                        </a>
+                                                    </li>
                                                 <% } %>
                                             </ul>
-                                        </li>
-                                    <% } else { %>
-                                        <li><a href="<%- url_for(theme.menu[i]) %>"><%- theme.label[i] %></a></li>
-                                    <% } %>
+                                        <% } %>
+                                    </li>
                                 <% } %>
                             </ul>
                         </nav>
@@ -30,8 +42,8 @@
             <header id="kratos-mobile-topnav" class="kratos-topnav">
                 <div class="container">
                     <div class="color-logo"><a href="<%- url_for() %>"><%= config.title %></a></div>
-                    <div class="nav-toggle">
-                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
                             <i></i>
                         </a>
                     </div>
@@ -53,6 +65,3 @@
         <div id="kratos-blog-post">
             <div class="container">
                 <div id="main" class="row">
-                    <% if (page.type !== '404' && theme.sidebar === 'left') { %>
-                        <%- partial('_partial/sidebar') %>
-                    <% } %>

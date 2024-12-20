@@ -1,9 +1,29 @@
 <head>
   <!-- 元数据 -->
   <meta charset="utf-8">
-  <link rel="icon" href="<%- theme.site_logo %>">
-  <title><% if (page.title) { %><%- page.title %> | <% } %><%- config.title %></title>
-  <meta name="author" content="<%- config.author  %>" />
+  <% if (theme.image.favicon) { %>
+    <link rel="icon" href="<%- theme.image.favicon %>">
+  <% } %>
+  <%
+  let title = page.title || __(page.title_i18n);
+  if (is_archive()){
+    title = __('title.archive');
+    if (is_month()){
+      title += ': ' + page.year + '-' + String(page.month).padStart(2, '0');
+    } else if (is_year()){
+      title += ': ' + page.year;
+    }
+  } else if (is_category()){
+    title = __('title.category') + ': ' + page.category;
+  } else if (is_tag()){
+    title = __('title.tag') + ': ' + page.tag;
+  } else if (is_post() && !title){
+    title = __('title.status');
+  }
+  %>
+  <title><% if (title) { %><%= title %> | <% } %><%= config.title %></title>
+  <link rel="canonical" href="<%- full_url_for(page.path) %>">
+  <meta name="author" content="<%- page.author || config.author  %>" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -16,65 +36,67 @@
     <meta name="keywords" content="<%- config.keywords %>" />
   <% } %>
   <%- open_graph({
-    image: full_url_for(page.pic ? page.path + page.pic : theme.site_logo),
-    twitter_site: "@" + theme.contact.twitter
+    image: (function(){
+      const image_path = page.pic ? page.path + page.pic : theme.site_logo;
+      return image_path ? full_url_for(image_path) : null;
+    })(),
+    // twitter_site: theme.contact.twitter ? "@" + theme.contact.twitter : null,
+    title
   }) %>
-  <% if (theme.contact.rss) {%><link rel="alternate" href="<%- theme.contact.rss %>" type="application/atom+xml"><% } %>
-  <!-- 站点验证相关 -->
-  <% if (theme.site_verify) { %>
-    <% if (theme.site_verify.google) { %>
-      <meta name="google-site-verification" content="<%- theme.site_verify.google %>" />
-    <% } %>
-    <% if (theme.site_verify.baidu) { %>
-      <meta name="baidu-site-verification" content="<%- theme.site_verify.baidu %>" />
-    <% } %>
-    <% if (theme.site_verify.bing) { %>
-      <meta name="msvalidate.01" content="<%- theme.site_verify.bing %>" />
-    <% } %>
+  <% if (config.feed) { %>
+    <%- feed_tag() %>
   <% } %>
   <!-- 样式表文件 -->
-  <link rel="stylesheet" id="kratos-css" href="<%- url_cdn('css/kratosr.min.css') %>" type="text/css" media="all">
-  <% if (theme.enable_dark) { %>
-    <link rel="stylesheet" id="darkmode-css" href="<%- url_cdn('css/kr-color-dark.min.css') %>" type="text/css" media="(prefers-color-scheme: dark)">
-    <script src="<%- url_cdn('js/kr-dark.min.js') %>"></script>
+  <%- css_theme_cdn('css/kr-core.min.css', {id: "kratos-css", media:"all"}) %>
+  <% if (config.syntax_highlighter && theme.syntax_highlighter.theme) { %>
+    <%- css_theme_cdn(`css/highlight/${config.syntax_highlighter}/${theme.syntax_highlighter.theme}.min.css`, {id: "highlight-css", media:"all"}) %>
   <% } %>
-  <% if (config.highlight && config.highlight.enable && theme.highlight_theme) { %>
-    <link rel="stylesheet" id="highlight-css" href="<%- url_cdn(`css/highlight/${theme.highlight_theme || 'night-eighties'}.min.css`) %>" type="text/css" media="all">
+  <%- css_theme_cdn('css/kr-theme/light.min.css', {id: "theme-light-css", media:"all"}) %>
+  <%- css_theme_cdn('css/kr-theme/dark.min.css', {id: "theme-dark-css", media:"(prefers-color-scheme: dark)"}) %>
+  <%- js_theme_cdn('js/kr-theme.min.js') %>
+  <%- css_npm_cdn('font-awesome', 'css/font-awesome.min.css', {id:"fontawe-css", media:"all"}) %>
+  <% if (theme.pjax || theme.search.provider === "local") { %>
+    <%- css_npm_cdn('nprogress', 'nprogress.css', {id:"nprogress-css", media:"all"}) %>
   <% } %>
-  <% if (config.prismjs && config.prismjs.enable) { %>
-    <link rel="stylesheet" id="prismjs-css" href="<%- url_cdn('css/prismjs.min.css') %>" type="text/css" media="all">
-  <% } %>
-  <link rel="stylesheet" id="fontawe-css" href="<%- url_npm_cdn('font-awesome@4.7.0/css/font-awesome.min.css') %>" type="text/css" media="all">
-  <link rel="stylesheet" id="nprogress-css" href="<%- url_npm_cdn('nprogress@0.2.0/nprogress.css') %>" type="text/css" media="all">
-  <% if (theme.posts.comments == 'disqusjs') { %>
-    <link rel="stylesheet" href="<%- url_npm_cdn('disqusjs@1.2.6/dist/disqusjs.css') %>">
-  <% } %>
-  <% if (theme.aplayer.enabled) { %>
-    <link rel="stylesheet" href="<%- url_npm_cdn('aplayer@1.10.1/dist/APlayer.min.css') %>">
-  <% }%>
-  <% if (theme.fancybox){ %>
-    <link rel="stylesheet" href="<%- url_npm_cdn('@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css') %>">
+  <% if (page.type !== '404' && theme.viewerjs) { %>
+    <%- css_npm_cdn('viewerjs', 'dist/viewer.min.css', {defer: true}) %>
   <% } %>
   <!-- 不得不预先加载的一些JS文件 -->
-  <script src="<%- url_npm_cdn('jquery@3.6.0/dist/jquery.min.js') %>"></script>
-  <% if (theme.posts.share) { %>
-    <script src="<%- url_npm_cdn('qrcode_js@1.0.0/qrcode.min.js') %>"></script>
+  <% if (theme.share.enable || theme.donate.enable) { %>
+    <%- js_npm_cdn('qr-code-styling', 'lib/qr-code-styling.js') %>
   <% } %>
-  <% if (theme.customStyles) { %>
+  <!-- 自定义站点横幅和背景 -->
   <style>
-    <% if (theme.customStyles.images?.banner) { %>
+    <% if (theme.image.banner) { %>
       .kratos-cover.kratos-cover-2 {
-        background-image: url('<%- theme.customStyles.images?.banner %>');
+        background-image: url('<%- theme.image.banner.light %>');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('<%- theme.image.banner.dark %>');
       }
     <% } %>
-    <% if (theme.customStyles.images?.background) { %>
+    <% if (theme.image.background) { %>
       @media(min-width:768px) {
         body.custom-background {
-          background-image: url('<%- theme.customStyles.images?.background %>');
+          background-image: url('<%- theme.image.background.light %>');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('<%- theme.image.background.dark %>');
         }
       }
     <% } %>
+    <% if (theme.image.about) { %>
+      .widget-kratos-about .photo-background {
+        background-image: url('<%- theme.image.about.light %>');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('<%- theme.image.about.dark %>');
+      }
+    <% } %>
   </style>
+
+  <!-- 额外的追加注入项 -->
+  <% if (theme.additional_injections.head) { %>
+    <%- theme.additional_injections.head %>
   <% } %>
 </head>
-
